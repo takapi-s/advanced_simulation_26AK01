@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -N himeno_task1
+#PBS -q Eduq
+#PBS -l select=1:ncpus=1:mem=16gb
+#PBS -l walltime=1:00:00
+#PBS -j oe
+
+ulimit -c 0
+. /etc/profile
+module load intel/2025
+
+cd "$PBS_O_WORKDIR"
+
+GRID_LIST=(S M L)
+for g in "${GRID_LIST[@]}"; do
+  OMP_NUM_THREADS=1 OPT=-O2 GRID="$g" \
+    bash scripts/run_benchmark.sh "results/raw/task1_${g}_t1.log"
+done
+
+bash scripts/parse_output.sh results/raw/task1_*.log

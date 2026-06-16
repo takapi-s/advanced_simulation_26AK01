@@ -1,0 +1,32 @@
+# ビルド成果物
+build/
+bin/
+*.o
+*.x
+*.out
+a.out
+src/bmt
+
+# 姫野ベンチの展開物（RIKEN から取得）
+src/*.lzh
+src/*.zip
+src/*.tar
+src/*.tar.gz
+src/himenoBMTxps.c
+src/himenoBMTxpa.c
+src/param.h
+src/Makefile
+src/Makefile.sample
+src/paramset.sh
+
+# PBS ジョブ出力
+himeno_*.o*
+results/*.o*
+results/*.e*
+results/*.log
+results/raw/
+
+# エディタ
+.vscode/
+*.swp
+*~

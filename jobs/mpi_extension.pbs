@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -N himeno_mpi
+#PBS -q Eduq
+#PBS -l select=1:ncpus=8:mem=16gb
+#PBS -l walltime=2:00:00
+#PBS -j oe
+
+ulimit -c 0
+set +u
+. /etc/profile
+set -u
+module load intel/2025
+module load intelmpi/2025
+
+cd "$PBS_O_WORKDIR"
+
+bash mpi/run_mpi_tasks.sh

@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -N himeno_task2
+#PBS -q Eduq
+#PBS -l select=1:ncpus=1:mem=16gb
+#PBS -l walltime=1:00:00
+#PBS -j oe
+
+ulimit -c 0
+. /etc/profile
+module load intel/2025
+
+cd "$PBS_O_WORKDIR"
+
+for opt in -O0 -O1 -O2 -O3; do
+  tag="${opt//-}"
+  OMP_NUM_THREADS=1 OPT="$opt" GRID=S \
+    bash scripts/run_benchmark.sh "results/raw/task2_${tag}_t1.log"
+done
+
+bash scripts/parse_output.sh results/raw/task2_*.log
